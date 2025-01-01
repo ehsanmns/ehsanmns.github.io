@@ -87,3 +87,19 @@ ul {
 ul li {
     margin-bottom: 10px;
 }
+.parallax {
+    background-image: url('https://upload.wikimedia.org/wikipedia/en/d/d4/OpenSees.jpg'); /* تصویر مورد نظر */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
