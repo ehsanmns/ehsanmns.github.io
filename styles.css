@@ -187,3 +187,62 @@ ul li {
 .publications a:hover {
     text-decoration: underline;
 }
+
+.publications {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.publications h1 {
+    font-size: 32px;
+    color: #0d47a1;
+    margin-bottom: 30px;
+}
+
+/* طراحی کارت مقالات */
+.publication-card {
+    background: linear-gradient(135deg, #f0f0f0, #ffffff);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.publication-card h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.publication-card p {
+    color: #555;
+    font-size: 16px;
+}
+
+.publication-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* دکمه لینک مقاله */
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #0d47a1;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #1565c0;
+}
