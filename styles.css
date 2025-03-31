@@ -151,45 +151,8 @@ ul li {
     border-radius: 8px;
 }
 
-.publications h1 {
-    text-align: center;
-    color: #0d47a1;
-    margin-bottom: 20px;
-}
-
-.publications ul {
-    list-style: none;
-    padding: 0;
-}
-
-.publications li {
-    padding: 15px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #ddd;
-}
-
-.publications li strong {
-    font-size: 18px;
-    color: #222;
-}
-
-.publications li em {
-    color: #666;
-    font-size: 14px;
-}
-
-.publications a {
-    color: #0d47a1;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.publications a:hover {
-    text-decoration: underline;
-}
-
 .publications {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 50px auto;
     padding: 20px;
     background: white;
@@ -204,25 +167,30 @@ ul li {
 }
 
 /* طراحی کارت مقالات */
+.publication-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
 .publication-card {
     background: linear-gradient(135deg, #f0f0f0, #ffffff);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-bottom: 20px;
     text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .publication-card h2 {
-    font-size: 20px;
+    font-size: 18px;
     color: #333;
     margin-bottom: 10px;
 }
 
 .publication-card p {
     color: #555;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .publication-card:hover {
@@ -234,7 +202,7 @@ ul li {
 .btn {
     display: inline-block;
     margin-top: 10px;
-    padding: 10px 20px;
+    padding: 8px 16px;
     background: #0d47a1;
     color: white;
     text-decoration: none;
