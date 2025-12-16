@@ -29,31 +29,45 @@ background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color
 .timeline { position:relative; margin:50px 0; }
 .timeline::before {
   content:""; position:absolute; left:50%; top:0; width:4px; height:100%;
-  background: linear-gradient(to bottom,#4f7cff,transparent); transform:translateX(-50%);
+  background: linear-gradient(180deg,#4f7cff 0%,#0b0f19 50%,#4f7cff 100%);
+  transform:translateX(-50%);
   z-index:0;
-  box-shadow:0 0 10px #4f7cff;
-}
-.year-label {
-  position:absolute; left:50%; transform:translateX(-50%);
-  font-size:1.2rem; background:#0b0f19; padding:5px 15px; border-radius:8px; border:2px solid #4f7cff; margin-top:-20px;
-  z-index:2;
-  box-shadow:0 0 10px #4f7cff;
+  box-shadow:0 0 20px #4f7cff;
 }
 
-.timeline-group { margin:80px 0; position:relative; }
+/* ---------- YEAR LABEL ---------- */
+.year-label {
+  position:absolute; left:50%; transform:translateX(-50%);
+  font-size:1.2rem; background:#0b0f19; padding:5px 15px; border-radius:10px; border:2px solid #4f7cff;
+  z-index:2;
+  box-shadow:0 0 15px #4f7cff;
+  animation: neonPulse 2.5s ease-in-out infinite;
+}
+@keyframes neonPulse {
+  0%,100%{box-shadow:0 0 15px #4f7cff;color:#6ea8ff;}
+  50%{box-shadow:0 0 30px #4f7cff;color:#ffffff;}
+}
 
 /* ---------- ITEMS ---------- */
 .timeline-item { position:relative; width:45%; padding:20px; opacity:0; transform:translateY(50px); transition:0.7s ease-out; }
+
+/* Side positions are assigned dynamically by year */
 .timeline-item.left { left:0; text-align:right; }
 .timeline-item.right { left:55%; text-align:left; }
 
+/* DOT NEON */
 .timeline-item::after {
   content:""; position:absolute; top:25px; width:20px; height:20px; background:#4f7cff; border-radius:50%; border:3px solid #0b0f19;
-  box-shadow:0 0 15px #4f7cff; z-index:1;
+  box-shadow:0 0 15px #4f7cff,0 0 30px #4f7cff; z-index:1; animation: dotPulse 2s infinite;
 }
 .timeline-item.left::after { right:-10px; }
 .timeline-item.right::after { left:-10px; }
+@keyframes dotPulse{
+  0%,100%{box-shadow:0 0 15px #4f7cff,0 0 30px #4f7cff;}
+  50%{box-shadow:0 0 25px #6ea8ff,0 0 50px #4da3ff;}
+}
 
+/* CARD */
 .timeline-card { background:#12182b; padding:25px; border-radius:18px; border:1px solid rgba(255,255,255,0.05); cursor:pointer; transition:all 0.3s ease; box-shadow:0 0 20px rgba(79,124,255,0.3); }
 .timeline-card:hover { transform: translateY(-6px); box-shadow:0 25px 50px rgba(79,124,255,0.5); }
 .timeline-card h3 { margin-bottom:10px; color:#ffffff; font-size:1.1rem; }
@@ -110,7 +124,7 @@ const papers = [
   {title:"Machine Learning-Aided Performance-Based Optimal Design of Steel Moment-Resisting Frames Using NSGA-II", year:2025, authors:"S. Bakhshinezhad, <strong>Ehsan Mansouri</strong>, Seong-Hoon Jeong", journal:"Natural Hazards Review", link:"https://ascelibrary.org/doi/10.1061/NHREFO.NHENG-2313"},
   {title:"Development of a new polyurethane elastomer class for accurate simulation of structural behavior in OpenSees", year:2024, authors:"SJ Mortazavi, SS Mortazavi, E Retzepis, <strong>Ehsan Mansouri</strong>, JW Hu", journal:"Journal of Mechanical Science and Technology", link:"https://link.springer.com/article/10.1007/s12206-024-1113-x"},
   {title:"Five Machine Learning Models Predicting the Global Shear Capacity of Composite Cellular Beams with Hollow-Core Units", year:2024, authors:"FPV Ferreira, S-H Jeong, <strong>Ehsan Mansouri</strong>, et al.", journal:"Buildings", link:"https://www.mdpi.com/2075-5309/14/7/2256"},
-  {title:"An advanced software interface to make OpenSees for thermal analysis of structures more user-friendly", year:2024, authors:"S-H Jeong, <strong>Ehsan Mansouri</strong>, N Ralston, JW Hu", journal:"Steel and Composite Structures", link:"https://www.techno-press.org/content/?page=article&journal=scs&volume=51&num=2&ordernum=3"},
+  {title:"An advanced software interface to make OpenSees for thermal analysis of structures more user-friendly", year:2024, authors:"S-H Jeong, <strong>Ehsan Mansouri</strong>, Nicholas Ralston, JW Hu", journal:"Steel and Composite Structures", link:"https://www.techno-press.org/content/?page=article&journal=scs&volume=51&num=2&ordernum=3"},
   {title:"Modeling properties of recycled aggregate concrete using gene expression programming and artificial neural network techniques", year:2024, authors:"PO Awoyera, A Bahrami, C Oranye, <strong>Ehsan Mansouri</strong>, et al.", journal:"Frontiers in Built Environment", link:"https://www.frontiersin.org/journals/built-environment/articles/10.3389/fbuil.2024.1447800/full"},
   {title:"Comparison of improved relevance vector machines for streamflow predictions", year:2024, authors:"Rana Muhammad Adnan, Reham R Mostafa, Hong‐Liang Dai, <strong>Ehsan Mansouri</strong>, Ozgur Kisi, Mohammad Zounemat‐Kermani", journal:"Journal of Forecasting", link:"https://onlinelibrary.wiley.com/doi/full/10.1002/for.3028"},
   {title:"A data replication algorithm for improving server efficiency in cloud computing using PSO and fuzzy systems", year:2023, authors:"Mostafa Sabzekar, <strong>Ehsan Mansouri</strong>, Arash Deldari", journal:"Computer and Knowledge Engineering", link:"https://cke.um.ac.ir/article_44305.html"},
@@ -123,23 +137,24 @@ const papers = [
 // ---------- GENERATE TIMELINE ----------
 const timelineContainer = document.getElementById("timeline");
 let currentYear = null;
-let side = "left";
+let sideSwitch = "left"; // toggle per year
 papers.sort((a,b)=>b.year-a.year).forEach((p,i)=>{
   if(p.year !== currentYear){
     currentYear = p.year;
+    // add year label
     const yearDiv = document.createElement("div");
     yearDiv.className="year-label";
     yearDiv.innerText=currentYear;
     timelineContainer.appendChild(yearDiv);
-    side="left"; // reset side per year
+    // switch side for new year
+    sideSwitch = sideSwitch==="left"?"right":"left";
   }
   const div = document.createElement("div");
-  div.className="timeline-item "+side;
+  div.className="timeline-item "+sideSwitch;
   div.style.transitionDelay = (i*0.15)+"s"; // staggered fade
   div.innerHTML = `<div class="timeline-card"><h3>${p.title}</h3></div>`;
   div.querySelector(".timeline-card").onclick = ()=>openModal(i);
   timelineContainer.appendChild(div);
-  side = side==="left"?"right":"left";
 });
 
 // ---------- MODAL ----------
