@@ -278,7 +278,7 @@
       <p>Email: <a href="mailto:ehsanmansouri128@gmail.com">ehsanmansouri128@gmail.com</a></p>
       <p>
         <a href="https://github.com/ehsanmns" target="_blank">GitHub</a> •
-        <a href="https://linkedin.com/in/ehsan-mansouri-565464271" target="_blank">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/ehsanmansouri93/" target="_blank">LinkedIn</a>
       </p>
     </div>
   </div>
@@ -316,6 +316,15 @@ if (liquidText) {
   });
 }
 
-AOS.init({ once: true, duration: 900 });</script>
+AOS.init({
+  once: false,
+  duration: 900,
+  mirror: true
+});
+
+// Force AOS to recalculate on scroll back
+window.addEventListener('scroll', () => {
+  AOS.refresh();
+});</script>
 </body>
 </html>
