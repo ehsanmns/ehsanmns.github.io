@@ -3,184 +3,314 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact</title>
+<title>Contact | Ehsan Mansouri</title>
 <style>
-    body {
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        background: #0f0f0f;
-        color: #fff;
-        overflow: hidden;
-    }
+/* ---------- GENERAL ---------- */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"Segoe UI",sans-serif; background:#0b0f19; color:#e6e6e6; scroll-behavior:smooth; }
+a { text-decoration:none; color:inherit; }
+.container { max-width:1200px; margin:100px auto; padding:0 20px; }
 
-    .contact-container {
-        position: relative;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+/* ---------- NAVBAR ---------- */
+nav {
+  position:fixed; top:0; width:100%; background:rgba(10,15,30,0.85); backdrop-filter:blur(10px);
+  padding:15px 40px; z-index:1000;
+}
+nav ul { display:flex; gap:30px; list-style:none; justify-content:center; }
+nav a { color:#cfd8ff; font-weight:500; transition:0.3s; }
+nav a:hover { color:#6ea8ff; }
 
-    .center-dot {
-        width: 20px;
-        height: 20px;
-        background: #00f0ff;
-        border-radius: 50%;
-        position: absolute;
-        z-index: 10;
-        animation: floatCenter 3s ease-in-out infinite alternate;
-    }
+/* ---------- TITLE ---------- */
+h1 { text-align:center; margin-bottom:80px; font-size:2.8rem; background:linear-gradient(90deg,#4da3ff,#ffffff,#4da3ff);
+background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:titleGlow 6s ease-in-out infinite;}
+@keyframes titleGlow{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
 
-    @keyframes floatCenter {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(-10px); }
-    }
+/* ---------- GRAPH ---------- */
+.graph-container {
+  position: relative;
+  height: 600px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-    .link-node {
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        background: #ff00a0;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        user-select: none;
-        font-size: 14px;
-        transition: transform 0.2s;
-    }
+#graph-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
 
-    .link-node:hover {
-        transform: scale(1.2);
-    }
+.node {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: #12182b;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(79,124,255,0.3);
+  animation: float 6s ease-in-out infinite;
+}
 
-    svg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-    }
+.node:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(79,124,255,0.5);
+}
 
-    line {
-        stroke: #00f0ff;
-        stroke-width: 2;
-        stroke-linecap: round;
-    }
+#central-node {
+  width: 150px;
+  height: 150px;
+  font-size: 1.2rem;
+  animation: neonPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes neonPulse {
+  0%,100%{box-shadow:0 0 15px #4f7cff;color:#6ea8ff;}
+  50%{box-shadow:0 0 30px #4f7cff;color:#ffffff;}
+}
+
+/* Slight random float variation for each node */
+.node:nth-child(2) { animation-duration: 7s; }
+.node:nth-child(3) { animation-duration: 5s; animation-delay: 1s; }
+.node:nth-child(4) { animation-duration: 6.5s; animation-delay: 2s; }
+.node:nth-child(5) { animation-duration: 5.5s; animation-delay: 0.5s; }
+.node:nth-child(6) { animation-duration: 7.5s; animation-delay: 1.5s; }
+
+/* ---------- MODAL ---------- */
+.modal { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); justify-content:center; align-items:center; z-index:2000; }
+.modal-content { background:#0f1425; padding:30px; border-radius:20px; max-width:700px; width:90%; position:relative; animation:pop 0.4s ease; box-shadow:0 0 30px #4f7cff; }
+@keyframes pop{ from{transform:scale(0.9);opacity:0;} to{transform:scale(1);opacity:1;} }
+.close { position:absolute; top:15px; right:20px; font-size:28px; cursor:pointer; color:#aaa; }
+.close:hover { color:white; }
+.modal a { display:inline-block; margin-top:20px; padding:10px 20px; border-radius:12px; background:#4f7cff; color:white; font-weight:500; text-decoration:none; }
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:768px){
+  .graph-container { height: 800px; }
+  .node { width: 100px; height: 100px; font-size: 0.9rem; }
+  #central-node { width: 120px; height: 120px; font-size: 1rem; }
+}
 </style>
 </head>
 <body>
 
-<div class="contact-container">
-    <div class="center-dot"></div>
+<!-- NAVBAR -->
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
 
-    <div class="link-node" data-type="email" title="Email">✉</div>
-    <div class="link-node" data-type="github" title="GitHub">GH</div>
-    <div class="link-node" data-type="linkedin" title="LinkedIn">IN</div>
-    <div class="link-node" data-type="youtube" title="YouTube">YT</div>
-    <div class="link-node" data-type="google" title="Scholar">GS</div>
-
-    <svg>
-        <line id="line-email"></line>
-        <line id="line-github"></line>
-        <line id="line-linkedin"></line>
-        <line id="line-youtube"></line>
-        <line id="line-google"></line>
-    </svg>
+<div class="container">
+<h1>Contact Me</h1>
+<div class="graph-container" id="graph">
+  <svg id="graph-svg"></svg>
+  <div class="node" id="central-node">Ehsan Mansouri</div>
+  <div class="node" id="email-node">Email</div>
+  <div class="node" id="github-node">GitHub</div>
+  <div class="node" id="linkedin-node">LinkedIn</div>
+  <div class="node" id="youtube-node">YouTube</div>
+  <div class="node" id="scholar-node">Google Scholar</div>
+</div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/gsap.min.js"></script>
+<!-- MODAL for Email -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">×</span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+  </div>
+</div>
+
 <script>
-    const center = { x: window.innerWidth/2, y: window.innerHeight/2 };
-    const nodes = document.querySelectorAll('.link-node');
-    const links = {
-        email: "ehsanmansouri128@gmail.com",
-        github: "https://github.com/ehsanmns",
-        linkedin: "https://www.linkedin.com/in/ehsanmansouri93/",
-        youtube: "https://www.youtube.com/@clickfixhq",
-        google: "https://scholar.google.com/citations?hl=en&user=uozvMBkAAAAJ"
-    };
+// ---------- DATA ----------
+const links = {
+  email: { text: 'ehsanmansouri128@gmail.com', isLink: false },
+  github: { text: 'GitHub Profile', link: 'https://github.com/ehsanmns', isLink: true },
+  linkedin: { text: 'LinkedIn Profile', link: 'https://www.linkedin.com/in/ehsanmansouri93/', isLink: true },
+  youtube: { text: 'YouTube Channel', link: 'https://www.youtube.com/@clickfixhq', isLink: true },
+  scholar: { text: 'Google Scholar', link: 'https://scholar.google.com/citations?hl=en&user=uozvMBkAAAAJ', isLink: true }
+};
 
-    const lineMap = {
-        email: document.getElementById('line-email'),
-        github: document.getElementById('line-github'),
-        linkedin: document.getElementById('line-linkedin'),
-        youtube: document.getElementById('line-youtube'),
-        google: document.getElementById('line-google')
-    };
+// ---------- SETUP GRAPH ----------
+const graph = document.getElementById('graph');
+const svg = document.getElementById('graph-svg');
+const centralNode = document.getElementById('central-node');
+const nodes = {
+  email: document.getElementById('email-node'),
+  github: document.getElementById('github-node'),
+  linkedin: document.getElementById('linkedin-node'),
+  youtube: document.getElementById('youtube-node'),
+  scholar: document.getElementById('scholar-node')
+};
 
-    // توزیع اولیه اطراف مرکز
-    const radius = 150;
-    const angles = [0, 72, 144, 216, 288];
-    nodes.forEach((node, i) => {
-        const rad = angles[i] * (Math.PI/180);
-        const x = center.x + radius * Math.cos(rad);
-        const y = center.y + radius * Math.sin(rad);
-        gsap.set(node, { x: x, y: y });
-        updateLine(node, lineMap[node.dataset.type]);
-    });
+const nodeKeys = Object.keys(nodes);
+const radius = 200; // Distance from center
+const angles = [0, 72, 144, 216, 288]; // 360/5 for pentagon-like
 
-    function updateLine(node, line) {
-        const rect = node.getBoundingClientRect();
-        line.setAttribute('x1', center.x);
-        line.setAttribute('y1', center.y);
-        line.setAttribute('x2', rect.left + rect.width/2);
-        line.setAttribute('y2', rect.top + rect.height/2);
-    }
+// Original positions
+const originalPositions = {};
 
-    nodes.forEach(node => {
-        let isDragging = false;
+// Function to position nodes
+function positionNodes() {
+  const centerX = graph.offsetWidth / 2;
+  const centerY = graph.offsetHeight / 2;
+  centralNode.style.left = `${centerX - centralNode.offsetWidth / 2}px`;
+  centralNode.style.top = `${centerY - centralNode.offsetHeight / 2}px`;
 
-        node.addEventListener('mousedown', e => {
-            isDragging = true;
-        });
+  nodeKeys.forEach((key, i) => {
+    const angle = angles[i] * Math.PI / 180;
+    const x = centerX + radius * Math.cos(angle) - nodes[key].offsetWidth / 2;
+    const y = centerY + radius * Math.sin(angle) - nodes[key].offsetHeight / 2;
+    nodes[key].style.left = `${x}px`;
+    nodes[key].style.top = `${y}px`;
+    originalPositions[key] = { x, y };
+  });
+}
 
-        window.addEventListener('mousemove', e => {
-            if (!isDragging) return;
-            gsap.set(node, { x: e.clientX - 20, y: e.clientY - 20 });
-            updateLine(node, lineMap[node.dataset.type]);
-        });
+// Function to draw lines
+function drawLines() {
+  svg.innerHTML = ''; // Clear previous
+  const centralRect = centralNode.getBoundingClientRect();
+  const graphRect = graph.getBoundingClientRect();
+  const cx = centralRect.left + centralRect.width / 2 - graphRect.left;
+  const cy = centralRect.top + centralRect.height / 2 - graphRect.top;
 
-        window.addEventListener('mouseup', e => {
-            if (!isDragging) return;
-            isDragging = false;
+  nodeKeys.forEach(key => {
+    const nodeRect = nodes[key].getBoundingClientRect();
+    const nx = nodeRect.left + nodeRect.width / 2 - graphRect.left;
+    const ny = nodeRect.top + nodeRect.height / 2 - graphRect.top;
 
-            // بازگرداندن به موقعیت اولیه
-            const index = Array.from(nodes).indexOf(node);
-            const rad = angles[index] * (Math.PI/180);
-            const x = center.x + radius * Math.cos(rad);
-            const y = center.y + radius * Math.sin(rad);
-            gsap.to(node, { duration: 0.5, x: x, y: y, ease: "elastic.out(1, 0.5)", onUpdate: () => {
-                updateLine(node, lineMap[node.dataset.type]);
-            }});
-        });
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', cx);
+    line.setAttribute('y1', cy);
+    line.setAttribute('x2', nx);
+    line.setAttribute('y2', ny);
+    line.setAttribute('stroke', '#4f7cff');
+    line.setAttribute('stroke-width', '2');
+    line.setAttribute('stroke-dasharray', '5,5');
+    svg.appendChild(line);
+  });
+}
 
-        node.addEventListener('click', () => {
-            const type = node.dataset.type;
-            if(type === 'email'){
-                navigator.clipboard.writeText(links[type]);
-                alert('Email copied: ' + links[type]);
-            } else {
-                window.open(links[type], '_blank');
-            }
-        });
-    });
+// Initial setup
+positionNodes();
+drawLines();
 
-    // افکت شناوری
-    function floatNodes() {
-        nodes.forEach(node => {
-            const offsetX = (Math.random() - 0.5) * 2;
-            const offsetY = (Math.random() - 0.5) * 2;
-            gsap.to(node, { x: `+=${offsetX}`, y: `+=${offsetY}`, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut", onUpdate: () => {
-                updateLine(node, lineMap[node.dataset.type]);
-            }});
-        });
-    }
-    floatNodes();
+// Resize handler
+window.addEventListener('resize', () => {
+  positionNodes();
+  drawLines();
+});
+
+// ---------- DRAG FUNCTIONALITY ----------
+let isDragging = false;
+let currentNode = null;
+let startX, startY, startMouseX, startMouseY;
+let dragThreshold = 5; // Pixels to consider as drag vs click
+
+nodeKeys.forEach(key => {
+  const node = nodes[key];
+  node.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    currentNode = key;
+    startX = parseFloat(node.style.left);
+    startY = parseFloat(node.style.top);
+    startMouseX = e.clientX;
+    startMouseY = e.clientY;
+    document.body.style.cursor = 'grabbing';
+  });
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const dx = e.clientX - startMouseX;
+  const dy = e.clientY - startMouseY;
+  const node = nodes[currentNode];
+  node.style.left = `${startX + dx}px`;
+  node.style.top = `${startY + dy}px`;
+  drawLines(); // Update lines dynamically
+});
+
+document.addEventListener('mouseup', (e) => {
+  if (!isDragging) return;
+  isDragging = false;
+  document.body.style.cursor = 'default';
+  const dx = e.clientX - startMouseX;
+  const dy = e.clientY - startMouseY;
+  const distance = Math.sqrt(dx*dx + dy*dy);
+
+  if (distance < dragThreshold) {
+    // Treat as click
+    handleClick(currentNode);
+  } else {
+    // Animate back
+    animateBack(currentNode);
+  }
+  currentNode = null;
+});
+
+// Function to animate back to original position
+function animateBack(key) {
+  const node = nodes[key];
+  const targetX = originalPositions[key].x;
+  const targetY = originalPositions[key].y;
+  const currentX = parseFloat(node.style.left);
+  const currentY = parseFloat(node.style.top);
+  const duration = 500; // ms
+  const startTime = performance.now();
+
+  function animate(time) {
+    const elapsed = time - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = progress * (2 - progress); // Ease out
+    node.style.left = `${currentX + (targetX - currentX) * ease}px`;
+    node.style.top = `${currentY + (targetY - currentY) * ease}px`;
+    drawLines();
+    if (progress < 1) requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+// ---------- CLICK HANDLER ----------
+function handleClick(key) {
+  const data = links[key];
+  if (data.isLink) {
+    window.open(data.link, '_blank');
+  } else {
+    // Show modal for email
+    openModal('Email', data.text);
+  }
+}
+
+// ---------- MODAL ----------
+function openModal(title, text) {
+  document.getElementById("modal").style.display = "flex";
+  document.getElementById("modalTitle").innerHTML = title;
+  document.getElementById("modalText").innerHTML = text;
+}
+function closeModal(){ document.getElementById("modal").style.display="none"; }
 </script>
-
 </body>
 </html>
