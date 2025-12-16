@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: #0f0f0f;
+        color: #fff;
+        overflow: hidden;
+    }
+
+    .contact-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .center-dot {
+        width: 20px;
+        height: 20px;
+        background: #00f0ff;
+        border-radius: 50%;
+        position: absolute;
+        z-index: 10;
+        animation: floatCenter 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatCenter {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-10px); }
+    }
+
+    .link-node {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background: #ff00a0;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        font-size: 14px;
+        transition: transform 0.2s;
+    }
+
+    .link-node:hover {
+        transform: scale(1.2);
+    }
+
+    svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    line {
+        stroke: #00f0ff;
+        stroke-width: 2;
+        stroke-linecap: round;
+    }
+</style>
+</head>
+<body>
+
+<div class="contact-container">
+    <div class="center-dot"></div>
+
+    <div class="link-node" data-type="email" title="Email">✉</div>
+    <div class="link-node" data-type="github" title="GitHub">GH</div>
+    <div class="link-node" data-type="linkedin" title="LinkedIn">IN</div>
+    <div class="link-node" data-type="youtube" title="YouTube">YT</div>
+    <div class="link-node" data-type="google" title="Scholar">GS</div>
+
+    <svg>
+        <line id="line-email"></line>
+        <line id="line-github"></line>
+        <line id="line-linkedin"></line>
+        <line id="line-youtube"></line>
+        <line id="line-google"></line>
+    </svg>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/gsap.min.js"></script>
+<script>
+    const center = { x: window.innerWidth/2, y: window.innerHeight/2 };
+    const nodes = document.querySelectorAll('.link-node');
+    const links = {
+        email: "ehsanmansouri128@gmail.com",
+        github: "https://github.com/ehsanmns",
+        linkedin: "https://www.linkedin.com/in/ehsanmansouri93/",
+        youtube: "https://www.youtube.com/@clickfixhq",
+        google: "https://scholar.google.com/citations?hl=en&user=uozvMBkAAAAJ"
+    };
+
+    const lineMap = {
+        email: document.getElementById('line-email'),
+        github: document.getElementById('line-github'),
+        linkedin: document.getElementById('line-linkedin'),
+        youtube: document.getElementById('line-youtube'),
+        google: document.getElementById('line-google')
+    };
+
+    // توزیع اولیه اطراف مرکز
+    const radius = 150;
+    const angles = [0, 72, 144, 216, 288];
+    nodes.forEach((node, i) => {
+        const rad = angles[i] * (Math.PI/180);
+        const x = center.x + radius * Math.cos(rad);
+        const y = center.y + radius * Math.sin(rad);
+        gsap.set(node, { x: x, y: y });
+        updateLine(node, lineMap[node.dataset.type]);
+    });
+
+    function updateLine(node, line) {
+        const rect = node.getBoundingClientRect();
+        line.setAttribute('x1', center.x);
+        line.setAttribute('y1', center.y);
+        line.setAttribute('x2', rect.left + rect.width/2);
+        line.setAttribute('y2', rect.top + rect.height/2);
+    }
+
+    nodes.forEach(node => {
+        let isDragging = false;
+
+        node.addEventListener('mousedown', e => {
+            isDragging = true;
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            gsap.set(node, { x: e.clientX - 20, y: e.clientY - 20 });
+            updateLine(node, lineMap[node.dataset.type]);
+        });
+
+        window.addEventListener('mouseup', e => {
+            if (!isDragging) return;
+            isDragging = false;
+
+            // بازگرداندن به موقعیت اولیه
+            const index = Array.from(nodes).indexOf(node);
+            const rad = angles[index] * (Math.PI/180);
+            const x = center.x + radius * Math.cos(rad);
+            const y = center.y + radius * Math.sin(rad);
+            gsap.to(node, { duration: 0.5, x: x, y: y, ease: "elastic.out(1, 0.5)", onUpdate: () => {
+                updateLine(node, lineMap[node.dataset.type]);
+            }});
+        });
+
+        node.addEventListener('click', () => {
+            const type = node.dataset.type;
+            if(type === 'email'){
+                navigator.clipboard.writeText(links[type]);
+                alert('Email copied: ' + links[type]);
+            } else {
+                window.open(links[type], '_blank');
+            }
+        });
+    });
+
+    // افکت شناوری
+    function floatNodes() {
+        nodes.forEach(node => {
+            const offsetX = (Math.random() - 0.5) * 2;
+            const offsetY = (Math.random() - 0.5) * 2;
+            gsap.to(node, { x: `+=${offsetX}`, y: `+=${offsetY}`, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut", onUpdate: () => {
+                updateLine(node, lineMap[node.dataset.type]);
+            }});
+        });
+    }
+    floatNodes();
+</script>
+
+</body>
+</html>
