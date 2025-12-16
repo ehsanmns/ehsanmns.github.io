@@ -5,171 +5,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Publications | Ehsan Mansouri</title>
 <style>
-/* ---------- RESET ---------- */
+/* ---------- GENERAL ---------- */
 * { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: "Segoe UI", sans-serif;
-  background: #0b0f19;
-  color: #e6e6e6;
-  scroll-behavior: smooth;
-}
+body { font-family:"Segoe UI",sans-serif; background:#0b0f19; color:#e6e6e6; scroll-behavior:smooth; }
+a { text-decoration:none; color:inherit; }
+.container { max-width:1200px; margin:100px auto; padding:0 20px; }
 
 /* ---------- NAVBAR ---------- */
 nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(10,15,30,0.9);
-  backdrop-filter: blur(10px);
-  padding: 15px 40px;
-  z-index: 1000;
+  position:fixed; top:0; width:100%; background:rgba(10,15,30,0.85); backdrop-filter:blur(10px);
+  padding:15px 40px; z-index:1000;
 }
-nav ul {
-  display: flex;
-  gap: 30px;
-  list-style: none;
-}
-nav a {
-  color: #cfd8ff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
-}
-nav a:hover { color: #6ea8ff; }
+nav ul { display:flex; gap:30px; list-style:none; justify-content:center; }
+nav a { color:#cfd8ff; font-weight:500; transition:0.3s; }
+nav a:hover { color:#6ea8ff; }
 
-/* ---------- PAGE ---------- */
-.container {
-  max-width: 1100px;
-  margin: 120px auto;
-  padding: 0 20px;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 80px;
-  font-size: 2.8rem;
-  background: linear-gradient(90deg,#4da3ff,#ffffff,#4da3ff);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: titleGlow 6s ease-in-out infinite;
-}
-@keyframes titleGlow{
-  0%{background-position:0%}
-  50%{background-position:100%}
-  100%{background-position:0%}
-}
+/* ---------- TITLE ---------- */
+h1 { text-align:center; margin-bottom:80px; font-size:2.8rem; background:linear-gradient(90deg,#4da3ff,#ffffff,#4da3ff);
+background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:titleGlow 6s ease-in-out infinite;}
+@keyframes titleGlow{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
 
 /* ---------- TIMELINE ---------- */
-.timeline {
-  position: relative;
-  margin: 50px 0;
-  padding: 0;
-}
+.timeline { position:relative; margin:50px 0; }
 .timeline::before {
-  content:"";
-  position:absolute;
-  left:50%;
-  top:0;
-  width:4px;
-  height:100%;
-  background: linear-gradient(to bottom,#4f7cff,transparent);
-  transform: translateX(-50%);
+  content:""; position:absolute; left:50%; top:0; width:4px; height:100%;
+  background: linear-gradient(to bottom,#4f7cff,transparent); transform:translateX(-50%);
   z-index:0;
+  box-shadow:0 0 10px #4f7cff;
+}
+.year-label {
+  position:absolute; left:50%; transform:translateX(-50%);
+  font-size:1.2rem; background:#0b0f19; padding:5px 15px; border-radius:8px; border:2px solid #4f7cff; margin-top:-20px;
+  z-index:2;
+  box-shadow:0 0 10px #4f7cff;
 }
 
-.timeline-item {
-  position: relative;
-  width: 50%;
-  padding: 20px 40px;
-  opacity:0;
-  transform: translateY(50px);
-}
+.timeline-group { margin:80px 0; position:relative; }
+
+/* ---------- ITEMS ---------- */
+.timeline-item { position:relative; width:45%; padding:20px; opacity:0; transform:translateY(50px); transition:0.7s ease-out; }
 .timeline-item.left { left:0; text-align:right; }
-.timeline-item.right { left:50%; text-align:left; }
+.timeline-item.right { left:55%; text-align:left; }
 
 .timeline-item::after {
-  content:"";
-  position:absolute;
-  top:20px;
-  width:20px;
-  height:20px;
-  background:#4f7cff;
-  border-radius:50%;
-  border:3px solid #0b0f19;
-  z-index:1;
+  content:""; position:absolute; top:25px; width:20px; height:20px; background:#4f7cff; border-radius:50%; border:3px solid #0b0f19;
+  box-shadow:0 0 15px #4f7cff; z-index:1;
 }
 .timeline-item.left::after { right:-10px; }
 .timeline-item.right::after { left:-10px; }
 
-.timeline-card {
-  background:#12182b;
-  padding: 25px;
-  border-radius: 15px;
-  border:1px solid rgba(255,255,255,0.05);
-  transition:0.3s;
-  cursor:pointer;
-  max-width: 400px;
-  display: inline-block;
-}
-.timeline-card:hover {
-  transform: translateY(-6px);
-  box-shadow:0 20px 40px rgba(0,0,0,0.6);
-}
-.timeline-card h3 {
-  margin-bottom:10px;
-  color:#ffffff;
-  font-size: 1.1rem;
-}
+.timeline-card { background:#12182b; padding:25px; border-radius:18px; border:1px solid rgba(255,255,255,0.05); cursor:pointer; transition:all 0.3s ease; box-shadow:0 0 20px rgba(79,124,255,0.3); }
+.timeline-card:hover { transform: translateY(-6px); box-shadow:0 25px 50px rgba(79,124,255,0.5); }
+.timeline-card h3 { margin-bottom:10px; color:#ffffff; font-size:1.1rem; }
 
 /* ---------- MODAL ---------- */
-.modal {
-  display:none;
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(6px);
-  justify-content:center;
-  align-items:center;
-  z-index:2000;
-}
-.modal-content {
-  background:#0f1425;
-  padding:30px;
-  border-radius:18px;
-  max-width:700px;
-  width:90%;
-  position:relative;
-  animation: pop 0.4s ease;
-}
-@keyframes pop{
-  from{transform:scale(0.9);opacity:0;}
-  to{transform:scale(1);opacity:1;}
-}
-.close {
-  position:absolute;
-  top:15px;
-  right:20px;
-  font-size:24px;
-  cursor:pointer;
-  color:#aaa;
-}
+.modal { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); justify-content:center; align-items:center; z-index:2000; }
+.modal-content { background:#0f1425; padding:30px; border-radius:20px; max-width:700px; width:90%; position:relative; animation:pop 0.4s ease; box-shadow:0 0 30px #4f7cff; }
+@keyframes pop{ from{transform:scale(0.9);opacity:0;} to{transform:scale(1);opacity:1;} }
+.close { position:absolute; top:15px; right:20px; font-size:28px; cursor:pointer; color:#aaa; }
 .close:hover { color:white; }
-.modal a {
-  display:inline-block;
-  margin-top:20px;
-  padding:10px 20px;
-  border-radius:10px;
-  background:#4f7cff;
-  color:white;
-  text-decoration:none;
-}
+.modal a { display:inline-block; margin-top:20px; padding:10px 20px; border-radius:12px; background:#4f7cff; color:white; font-weight:500; text-decoration:none; }
 
-/* ---------- SCROLL ANIMATION ---------- */
-.timeline-item.show {
-  opacity:1 !important;
-  transform: translateY(0) !important;
-  transition: all 0.6s ease-out;
+/* ---------- SHOW ANIMATION ---------- */
+.timeline-item.show { opacity:1 !important; transform:translateY(0) !important; }
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:768px){
+  .timeline-item, .timeline-item.right, .timeline-item.left { width:90%; left:5% !important; text-align:left !important; }
+  .timeline-item::after { left:-10px !important; right:auto !important; }
+  .year-label { font-size:1rem; padding:5px 12px; }
 }
 </style>
 </head>
@@ -186,7 +90,7 @@ h1 {
 </nav>
 
 <div class="container">
-<h1>Publications</h1>
+<h1>Publications Timeline</h1>
 <div class="timeline" id="timeline"></div>
 </div>
 
@@ -218,12 +122,24 @@ const papers = [
 
 // ---------- GENERATE TIMELINE ----------
 const timelineContainer = document.getElementById("timeline");
+let currentYear = null;
+let side = "left";
 papers.sort((a,b)=>b.year-a.year).forEach((p,i)=>{
+  if(p.year !== currentYear){
+    currentYear = p.year;
+    const yearDiv = document.createElement("div");
+    yearDiv.className="year-label";
+    yearDiv.innerText=currentYear;
+    timelineContainer.appendChild(yearDiv);
+    side="left"; // reset side per year
+  }
   const div = document.createElement("div");
-  div.className = "timeline-item "+(i%2===0?"left":"right");
+  div.className="timeline-item "+side;
+  div.style.transitionDelay = (i*0.15)+"s"; // staggered fade
   div.innerHTML = `<div class="timeline-card"><h3>${p.title}</h3></div>`;
   div.querySelector(".timeline-card").onclick = ()=>openModal(i);
   timelineContainer.appendChild(div);
+  side = side==="left"?"right":"left";
 });
 
 // ---------- MODAL ----------
@@ -246,6 +162,5 @@ const observer = new IntersectionObserver((entries)=>{
 },{threshold:0.1});
 document.querySelectorAll('.timeline-item').forEach(el=>observer.observe(el));
 </script>
-
 </body>
 </html>
