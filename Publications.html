@@ -64,6 +64,7 @@ h1 {
 .timeline {
   position: relative;
   margin: 50px 0;
+  padding: 0;
 }
 .timeline::before {
   content:"";
@@ -74,6 +75,7 @@ h1 {
   height:100%;
   background: linear-gradient(to bottom,#4f7cff,transparent);
   transform: translateX(-50%);
+  z-index:0;
 }
 
 .timeline-item {
@@ -82,9 +84,7 @@ h1 {
   padding: 20px 40px;
   opacity:0;
   transform: translateY(50px);
-  transition:0.5s;
 }
-
 .timeline-item.left { left:0; text-align:right; }
 .timeline-item.right { left:50%; text-align:left; }
 
@@ -99,7 +99,6 @@ h1 {
   border:3px solid #0b0f19;
   z-index:1;
 }
-
 .timeline-item.left::after { right:-10px; }
 .timeline-item.right::after { left:-10px; }
 
@@ -110,6 +109,8 @@ h1 {
   border:1px solid rgba(255,255,255,0.05);
   transition:0.3s;
   cursor:pointer;
+  max-width: 400px;
+  display: inline-block;
 }
 .timeline-card:hover {
   transform: translateY(-6px);
@@ -118,6 +119,7 @@ h1 {
 .timeline-card h3 {
   margin-bottom:10px;
   color:#ffffff;
+  font-size: 1.1rem;
 }
 
 /* ---------- MODAL ---------- */
@@ -161,6 +163,13 @@ h1 {
   background:#4f7cff;
   color:white;
   text-decoration:none;
+}
+
+/* ---------- SCROLL ANIMATION ---------- */
+.timeline-item.show {
+  opacity:1 !important;
+  transform: translateY(0) !important;
+  transition: all 0.6s ease-out;
 }
 </style>
 </head>
@@ -212,12 +221,9 @@ const timelineContainer = document.getElementById("timeline");
 papers.sort((a,b)=>b.year-a.year).forEach((p,i)=>{
   const div = document.createElement("div");
   div.className = "timeline-item "+(i%2===0?"left":"right");
-  div.innerHTML = `<div class="timeline-card" style="animation-delay:${i*0.15}s"><h3>${p.title}</h3></div>`;
-  div.onclick = ()=>openModal(i);
+  div.innerHTML = `<div class="timeline-card"><h3>${p.title}</h3></div>`;
+  div.querySelector(".timeline-card").onclick = ()=>openModal(i);
   timelineContainer.appendChild(div);
-  // Trigger animation
-  setTimeout(()=>div.querySelector(".timeline-card").style.opacity=1, i*150);
-  setTimeout(()=>div.querySelector(".timeline-card").style.transform="translateY(0)", i*150);
 });
 
 // ---------- MODAL ----------
@@ -229,6 +235,16 @@ function openModal(i){
   document.getElementById("modalLink").href = p.link;
 }
 function closeModal(){ document.getElementById("modal").style.display="none"; }
+
+// ---------- SCROLL ANIMATION ----------
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.timeline-item').forEach(el=>observer.observe(el));
 </script>
 
 </body>
