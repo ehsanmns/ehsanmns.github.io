@@ -86,6 +86,22 @@ background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color
   50%{box-shadow:0 0 30px #4f7cff;color:#ffffff;}
 }
 
+/* Neon animation for lines */
+@keyframes lineNeon {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px #4f7cff);
+    stroke: #4f7cff;
+  }
+  50% {
+    filter: drop-shadow(0 0 15px #6ea8ff);
+    stroke: #6ea8ff;
+  }
+}
+
+.neon-line {
+  animation: lineNeon 2.5s ease-in-out infinite;
+}
+
 /* Slight random float variation for each node */
 .node:nth-child(2) { animation-duration: 7s; }
 .node:nth-child(3) { animation-duration: 5s; animation-delay: 1s; }
@@ -207,9 +223,9 @@ function drawLines() {
     line.setAttribute('y1', cy);
     line.setAttribute('x2', nx);
     line.setAttribute('y2', ny);
-    line.setAttribute('stroke', '#4f7cff');
     line.setAttribute('stroke-width', '2');
     line.setAttribute('stroke-dasharray', '5,5');
+    line.classList.add('neon-line');
     svg.appendChild(line);
   });
 }
