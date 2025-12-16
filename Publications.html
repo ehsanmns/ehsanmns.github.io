@@ -66,6 +66,7 @@
             transform: translateY(20px);
             opacity: 0;
             transition: transform 0.6s ease, opacity 0.6s ease;
+            z-index: 1; /* ensure content is clickable */
         }
 
         .publication-card::before {
@@ -75,6 +76,7 @@
             background: radial-gradient(circle at top right, rgba(56,189,248,0.25), transparent 60%);
             opacity: 0;
             transition: opacity 0.35s ease;
+            pointer-events: none; /* FIX: allow clicks on buttons */
         }
 
         .publication-card:hover {
@@ -210,11 +212,9 @@
         setTimeout(() => {
             card.style.transform = 'translateY(0)';
             card.style.opacity = '1';
-        }, index * 311);
+        }, index * 150);
     });
 </script>
 
 </body>
 </html>
-
-
