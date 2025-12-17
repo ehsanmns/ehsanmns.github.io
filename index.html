@@ -1,333 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ehsan Mansouri | Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ehsan Mansouri | Portfolio</title>
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#020617;
+  --accent:#38bdf8;
+  --neon:#22d3ee;
+  --text:#e5e7eb;
+}
 
-  <!-- AOS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+body{
+  font-family:Inter,sans-serif;
+  background:radial-gradient(circle at top,#0f172a,#020617);
+  color:var(--text);
+}
 
-  <style>
-    :root {
-      --bg-dark: #0b0f19;
-      --card-dark: #111827;
-      --accent: #38bdf8;
-      --text-light: #e5e7eb;
-    }
+/* NAV */
+.navbar{
+  backdrop-filter:blur(12px);
+  background:rgba(2,6,23,.85);
+}
+.nav-link{
+  padding:8px 16px;
+  margin:0 6px;
+  border-radius:14px;
+  transition:.35s;
+}
+.nav-link:hover{
+  color:#fff!important;
+  background:rgba(255,255,255,.08);
+  box-shadow:0 0 18px rgba(56,189,248,.6);
+  transform:translateY(-2px);
+}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top, #0f172a, #020617);
-      color: var(--text-light);
-      scroll-behavior: smooth;
-    }
+/* HERO */
+.hero{
+  min-height:75vh;
+  display:flex;
+  align-items:center;
+  text-align:center;
+}
+.hero img{
+  width:160px;
+  border-radius:50%;
+  border:3px solid var(--accent);
+  box-shadow:0 0 35px rgba(56,189,248,.6);
+  transition:.4s;
+}
+.hero img:hover{
+  transform:scale(1.08) rotate(2deg);
+}
 
-    /* NAVBAR */
-    .navbar {
-      backdrop-filter: blur(10px);
-      background: rgba(2, 6, 23, 0.8);
-    }
+/* NEON TITLE */
+.liquid-letter{
+  display:inline-block;
+  transition:.35s;
+}
+.liquid-letter.active{
+  color:#fff;
+  text-shadow:
+    0 0 6px var(--neon),
+    0 0 18px var(--neon),
+    0 0 32px rgba(34,211,238,.6);
+}
 
-    .nav-link {
-      position: relative;
-      padding: 8px 16px;
-      margin: 0 6px;
-      border-radius: 14px;
-      transition: all 0.35s ease;
-      backdrop-filter: blur(0px);
-    }
+/* TYPEWRITER */
+#typing-role{
+  font-size:1.25rem;
+  color:var(--neon);
+  text-shadow:0 0 12px rgba(34,211,238,.8);
+  border-right:2px solid var(--neon);
+  padding-right:6px;
+  min-height:1.6em;
+  animation:blink .8s infinite;
+}
+@keyframes blink{50%{border-color:transparent}}
 
-    /* LIQUID GLASS EFFECT */
-    .nav-link:hover {
-      background: linear-gradient(135deg,
-        rgba(255,255,255,0.18),
-        rgba(255,255,255,0.05)
-      );
-      backdrop-filter: blur(12px);
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.25),
-        0 8px 30px rgba(56,189,248,0.35);
-      color: #ffffff !important;
-      transform: translateY(-2px);
-    }
+/* SECTIONS */
+section{padding:80px 0;}
+.section-title{
+  text-align:center;
+  font-weight:700;
+  margin-bottom:40px;
+  text-shadow:0 0 12px rgba(56,189,248,.5);
+}
 
-    .nav-link::after {
-      display: none;
-    }
+/* ABOUT NEON */
+.about-text{
+  max-width:900px;
+  margin:auto;
+  line-height:1.9;
+  color:#cbd5f5;
+}
+.about-text p{
+  position:relative;
+}
+.about-text p::before{
+  content:"";
+  position:absolute;
+  left:-18px;
+  top:8px;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--neon);
+  box-shadow:0 0 12px var(--neon);
+}
 
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: 0.3s;
-    }
+/* CONTACT NEON BOX */
+.contact-box{
+  border:1px solid rgba(56,189,248,.35);
+  border-radius:22px;
+  padding:40px;
+  box-shadow:
+    0 0 25px rgba(56,189,248,.35),
+    inset 0 0 25px rgba(34,211,238,.15);
+}
+.contact-box a{
+  color:var(--neon);
+  text-decoration:none;
+}
+.contact-box a:hover{
+  text-shadow:0 0 12px var(--neon);
+}
 
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 75vh;
-      display: flex;
-      align-items: center;
-      text-align: center;
-    }
-
-    .hero h1 span {
-      color: var(--accent);
-    }
-
-    .hero img {
-      width: 160px;
-      border-radius: 50%;
-      border: 4px solid var(--accent);
-      transition: transform 0.4s, box-shadow 0.4s;
-    }
-
-    .hero img:hover {
-      transform: scale(1.1) rotate(3deg);
-      box-shadow: 0 0 30px rgba(56,189,248,0.6);
-    }
-
-    /* SECTION */
-    section {
-      padding: 70px 0;
-    }
-
-    .section-title {
-      font-weight: 700;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    /* CARDS */
-    .glass-card {
-      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-      border-radius: 20px;
-      padding: 25px;
-      height: 100%;
-      transition: transform 0.4s, box-shadow 0.4s;
-    }
-
-    .glass-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    }
-
-    .glass-card img {
-      border-radius: 15px;
-      margin-bottom: 15px;
-    }
-
-    /* BUTTON */
-    .btn-accent {
-      background: var(--accent);
-      border: none;
-      color: #020617;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    .btn-accent:hover {
-      background: #0ea5e9;
-      transform: scale(1.05);
-    }
-
-    /* FOOTER */
-    footer {
-      background: #020617;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-  
-    /* LETTER-LEVEL LIQUID LIGHT */
-    .liquid-title {
-      font-weight: 700;
-      cursor: default;
-    }
-
-    .liquid-letter {
-      display: inline-block;
-      transition: color 0.35s ease, text-shadow 0.45s ease;
-      color: var(--text-light);
-    }
-
-    .liquid-letter.active {
-      color: #ffffff;
-      text-shadow:
-        0 0 6px rgba(56,189,248,0.6),
-        0 0 16px rgba(56,189,248,0.4),
-        0 0 28px rgba(56,189,248,0.25);
-    }
-
-    .liquid-title .word {
-      display: inline-block;
-      transition: color 0.25s ease, text-shadow 0.25s ease;
-      color: var(--text-light);
-    }
-
-    .liquid-title .word:hover {
-      color: #ffffff;
-      text-shadow:
-        0 0 8px rgba(56,189,248,0.6),
-        0 0 18px rgba(56,189,248,0.45),
-        0 0 30px rgba(56,189,248,0.25);
-    }
-
+/* FOOTER */
+footer{
+  background:#020617;
+  border-top:1px solid rgba(255,255,255,.1);
+}
 </style>
 </head>
+
 <body>
 
 <!-- NAV -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">Ehsan</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto align-items-center">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="Publications.html">Publications</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </div>
+<div class="container">
+<a class="navbar-brand fw-bold" href="#">Ehsan</a>
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="nav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+<li class="nav-item"><a class="nav-link" href="Publications.html">Publications</a></li>
+<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+</ul>
+</div>
+</div>
 </nav>
 
 <!-- HERO -->
 <section id="home" class="hero">
-  <div class="container" data-aos="fade-up">
-    <img src="https://avatars.githubusercontent.com/u/123354171?v=4" alt="Ehsan" />
-    <h1 class="mt-4 liquid-title" id="liquidText">Hi, I'm Ehsan Mansouri</h1>
-    <p class="lead mt-3">Data Scientist • Machine Learning Researcher • Software Engineer</p>
-  </div>
+<div class="container" data-aos="fade-up">
+<img src="https://avatars.githubusercontent.com/u/123354171?v=4">
+<h1 class="mt-4 liquid-title" id="liquidText">Hi, I'm Ehsan Mansouri</h1>
+<div id="typing-role" class="mt-3"></div>
+</div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" style="padding-top:40px;">
-  <div class="container" data-aos="fade-right">
-    <h2 class="section-title">About Me</h2>
-    <p class="text-center col-lg-8 mx-auto">
-      I work on machine learning, data science, and engineering-focused software solutions.
-      My research includes OpenSees usability improvements and ML-based modeling of recycled aggregate concrete.
-    </p>
-  </div>
+<section id="about">
+<div class="container" data-aos="fade-up">
+<h2 class="section-title">About Me</h2>
+<div class="about-text">
+<p>I design and build data-driven and AI-powered software solutions at the intersection of machine learning, engineering, and real-world systems.</p>
+<p>My work focuses on machine learning modeling, optimization, and advanced software interfaces, improving platforms like OpenSees.</p>
+<p>I have authored peer-reviewed publications in ASCE, Frontiers, Steel and Composite Structures, and JMST.</p>
+<p>I am passionate about transforming complex problems into scalable, intelligent solutions.</p>
+</div>
+</div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="container">
-    <h2 class="section-title" data-aos="fade-up">Projects</h2>
-    <div class="row g-4">
-
-      <div class="col-md-4" data-aos="zoom-in">
-        <div class="glass-card">
-          <img src="https://upload.wikimedia.org/wikipedia/en/d/d4/OpenSees.jpg" class="img-fluid" />
-          <h5>OpenSees Interface</h5>
-          <p>Advanced interface for structural thermal analysis.</p>
-          <a class="btn btn-accent">View</a>
-        </div>
-      </div>
-
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
-        <div class="glass-card">
-          <img src="https://bigblue.academy/images/image/blog/what-is-machine-learning-2023-beginners-guide/1-3cxboknql4qs-lryht3pqw.jpg" class="img-fluid" />
-          <h5>ML for RAC</h5>
-          <p>ANN & GEP models for concrete material prediction.</p>
-          <a class="btn btn-accent">View</a>
-        </div>
-      </div>
-
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-        <div class="glass-card">
-          <img src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2022/01/104228210.jpg" class="img-fluid" />
-          <h5>Web Portfolio</h5>
-          <p>Modern responsive UI & UX design collection.</p>
-          <a class="btn btn-accent">View</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
 <!-- CONTACT -->
 <section id="contact">
-  <div class="container" data-aos="fade-up">
-    <h2 class="section-title"><a href="contact.html" style="color: inherit; text-decoration: none;">Contact</a></h2>
-    <div class="text-center">
-      <p>Email: <a href="mailto:ehsanmansouri128@gmail.com">ehsanmansouri128@gmail.com</a></p>
-      <p>
-        <a href="https://github.com/ehsanmns" target="_blank">GitHub</a> •
-        <a href="https://www.linkedin.com/in/ehsanmansouri93/" target="_blank">LinkedIn</a>
-      </p>
-    </div>
-  </div>
+<div class="container contact-box" data-aos="zoom-in">
+<h2 class="section-title">
+<a href="contact.html" style="color:inherit;text-decoration:none;">Contact</a>
+</h2>
+<div class="text-center">
+<p>Email: <a href="mailto:ehsanmansouri128@gmail.com">ehsanmansouri128@gmail.com</a></p>
+<p>
+<a href="https://github.com/ehsanmns" target="_blank">GitHub</a> •
+<a href="https://linkedin.com/in/ehsanmansouri93" target="_blank">LinkedIn</a>
+</p>
+</div>
+</div>
 </section>
 
 <footer class="text-center py-4">
-  <p>© 2025 Ehsan Mansouri</p>
+© 2025 Ehsan Mansouri
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 <script>
-
-/* LETTER SPLIT + LIQUID HOVER */
-const liquidText = document.getElementById('liquidText');
-
-if (liquidText) {
-  const text = liquidText.innerText;
-  liquidText.innerHTML = '';
-
-  [...text].forEach(char => {
-    const span = document.createElement('span');
-    span.className = 'liquid-letter';
-    span.innerHTML = char === ' ' ? '&nbsp;' : char;
-
-    span.addEventListener('mouseenter', () => {
-      span.classList.add('active');
-    });
-
-    span.addEventListener('mouseleave', () => {
-      setTimeout(() => span.classList.remove('active'), 120);
-    });
-
-    liquidText.appendChild(span);
-  });
-}
-
-AOS.init({
-  once: false,
-  duration: 900,
-  mirror: true
+/* LIQUID TITLE */
+const lt=document.getElementById("liquidText");
+const txt=lt.innerText; lt.innerHTML="";
+[...txt].forEach(c=>{
+const s=document.createElement("span");
+s.className="liquid-letter";
+s.innerHTML=c===" "?"&nbsp;":c;
+s.onmouseenter=()=>s.classList.add("active");
+s.onmouseleave=()=>setTimeout(()=>s.classList.remove("active"),120);
+lt.appendChild(s);
 });
 
-// Force AOS to recalculate on scroll back
-window.addEventListener('scroll', () => {
-  AOS.refresh();
-});</script>
+/* TYPEWRITER */
+const roles=[
+"Data Scientist",
+"Machine Learning Researcher",
+"Software Engineer",
+"Network Engineer"
+];
+let r=0,i=0,d=false;
+const t=document.getElementById("typing-role");
+(function type(){
+const cur=roles[r];
+if(!d){
+t.textContent=cur.slice(0,++i);
+if(i===cur.length)setTimeout(()=>d=true,1300);
+}else{
+t.textContent=cur.slice(0,--i);
+if(i===0){d=false;r=(r+1)%roles.length;}
+}
+setTimeout(type,d?45:75);
+})();
+
+/* AOS */
+AOS.init({once:false,duration:900,mirror:true});
+</script>
+
 </body>
 </html>
-
-
