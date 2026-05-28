@@ -4,93 +4,360 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Publications | Ehsan Mansouri</title>
+
 <style>
+
 /* ---------- GENERAL ---------- */
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:"Segoe UI",sans-serif; background:#0b0f19; color:#e6e6e6; scroll-behavior:smooth; }
-a { text-decoration:none; color:inherit; }
-.container { max-width:1200px; margin:100px auto; padding:0 20px; }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:"Segoe UI",sans-serif;
+  background:#0b0f19;
+  color:#e6e6e6;
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.container{
+  max-width:1200px;
+  margin:100px auto;
+  padding:0 20px;
+}
 
 /* ---------- NAVBAR ---------- */
-nav {
-  position:fixed; top:0; width:100%; background:rgba(10,15,30,0.85); backdrop-filter:blur(10px);
-  padding:15px 40px; z-index:1000;
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(10,15,30,0.85);
+  backdrop-filter:blur(12px);
+  padding:15px 40px;
+  z-index:1000;
+  border-bottom:1px solid rgba(255,255,255,0.05);
 }
-nav ul { display:flex; gap:30px; list-style:none; justify-content:center; }
-nav a { color:#cfd8ff; font-weight:500; transition:0.3s; }
-nav a:hover { color:#6ea8ff; }
+
+nav ul{
+  display:flex;
+  gap:30px;
+  list-style:none;
+  justify-content:center;
+}
+
+nav a{
+  color:#cfd8ff;
+  font-weight:500;
+  transition:0.3s;
+  padding:8px 14px;
+  border-radius:12px;
+}
+
+nav a:hover{
+  color:#ffffff;
+  background:rgba(255,255,255,0.08);
+  box-shadow:0 0 20px rgba(79,124,255,0.45);
+}
 
 /* ---------- TITLE ---------- */
-h1 { text-align:center; margin-bottom:80px; font-size:2.8rem; background:linear-gradient(90deg,#4da3ff,#ffffff,#4da3ff);
-background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:titleGlow 6s ease-in-out infinite;}
-@keyframes titleGlow{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
+h1{
+  text-align:center;
+  margin-bottom:80px;
+  font-size:2.8rem;
+  background:linear-gradient(90deg,#4da3ff,#ffffff,#4da3ff);
+  background-size:300% 300%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:titleGlow 6s ease-in-out infinite;
+}
+
+@keyframes titleGlow{
+  0%{background-position:0%}
+  50%{background-position:100%}
+  100%{background-position:0%}
+}
 
 /* ---------- TIMELINE ---------- */
-.timeline { position:relative; margin:50px 0; }
-.timeline::before {
-  content:""; position:absolute; left:50%; top:0; width:4px; height:100%;
-  background: linear-gradient(180deg,#4f7cff 0%,#0b0f19 50%,#4f7cff 100%);
+.timeline{
+  position:relative;
+  margin:50px 0;
+}
+
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:4px;
+  height:100%;
+  background:linear-gradient(180deg,#4f7cff 0%,#0b0f19 50%,#4f7cff 100%);
   transform:translateX(-50%);
   z-index:0;
   box-shadow:0 0 20px #4f7cff;
 }
 
 /* ---------- YEAR LABEL ---------- */
-.year-label {
-  position:absolute; left:50%; transform:translateX(-50%);
-  font-size:1.2rem; background:#0b0f19; padding:5px 15px; border-radius:10px; border:2px solid #4f7cff;
+.year-label{
+  position:relative;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:1.2rem;
+  background:#0b0f19;
+  padding:6px 16px;
+  border-radius:12px;
+  border:2px solid #4f7cff;
   z-index:2;
+  width:max-content;
+  margin:60px 0;
   box-shadow:0 0 15px #4f7cff;
-  animation: neonPulse 2.5s ease-in-out infinite;
+  animation:neonPulse 2.5s ease-in-out infinite;
 }
-@keyframes neonPulse {
-  0%,100%{box-shadow:0 0 15px #4f7cff;color:#6ea8ff;}
-  50%{box-shadow:0 0 30px #4f7cff;color:#ffffff;}
+
+@keyframes neonPulse{
+  0%,100%{
+    box-shadow:0 0 15px #4f7cff;
+    color:#6ea8ff;
+  }
+  50%{
+    box-shadow:0 0 30px #4f7cff;
+    color:#ffffff;
+  }
 }
 
 /* ---------- ITEMS ---------- */
-.timeline-item { position:relative; width:45%; padding:20px; opacity:0; transform:translateY(50px); transition:0.7s ease-out; }
-
-/* Side positions are assigned dynamically by year */
-.timeline-item.left { left:0; text-align:right; }
-.timeline-item.right { left:55%; text-align:left; }
-
-/* DOT NEON */
-.timeline-item::after {
-  content:""; position:absolute; top:25px; width:20px; height:20px; background:#4f7cff; border-radius:50%; border:3px solid #0b0f19;
-  box-shadow:0 0 15px #4f7cff,0 0 30px #4f7cff; z-index:1; animation: dotPulse 2s infinite;
+.timeline-item{
+  position:relative;
+  width:45%;
+  padding:20px;
+  opacity:0;
+  transform:translateY(50px);
+  transition:0.7s ease-out;
 }
-.timeline-item.left::after { right:-10px; }
-.timeline-item.right::after { left:-10px; }
+
+.timeline-item.left{
+  left:0;
+  text-align:right;
+}
+
+.timeline-item.right{
+  left:55%;
+  text-align:left;
+}
+
+/* ---------- NEON DOT ---------- */
+.timeline-item::after{
+  content:"";
+  position:absolute;
+  top:35px;
+  width:20px;
+  height:20px;
+  background:#4f7cff;
+  border-radius:50%;
+  border:3px solid #0b0f19;
+  box-shadow:
+    0 0 15px #4f7cff,
+    0 0 30px #4f7cff;
+  z-index:1;
+  animation:dotPulse 2s infinite;
+}
+
+.timeline-item.left::after{
+  right:-10px;
+}
+
+.timeline-item.right::after{
+  left:-10px;
+}
+
 @keyframes dotPulse{
-  0%,100%{box-shadow:0 0 15px #4f7cff,0 0 30px #4f7cff;}
-  50%{box-shadow:0 0 25px #6ea8ff,0 0 50px #4da3ff;}
+  0%,100%{
+    box-shadow:
+      0 0 15px #4f7cff,
+      0 0 30px #4f7cff;
+  }
+  50%{
+    box-shadow:
+      0 0 25px #6ea8ff,
+      0 0 50px #4da3ff;
+  }
 }
 
-/* CARD */
-.timeline-card { background:#12182b; padding:25px; border-radius:18px; border:1px solid rgba(255,255,255,0.05); cursor:pointer; transition:all 0.3s ease; box-shadow:0 0 20px rgba(79,124,255,0.3); }
-.timeline-card:hover { transform: translateY(-6px); box-shadow:0 25px 50px rgba(79,124,255,0.5); }
-.timeline-card h3 { margin-bottom:10px; color:#ffffff; font-size:1.1rem; }
+/* ---------- CARD ---------- */
+.timeline-card{
+  background:#12182b;
+  padding:25px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.05);
+  cursor:pointer;
+  transition:all 0.35s ease;
+  box-shadow:0 0 20px rgba(79,124,255,0.25);
+  position:relative;
+  overflow:hidden;
+}
+
+.timeline-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.08),
+    transparent
+  );
+  transform:translateX(-100%);
+  transition:0.8s;
+}
+
+.timeline-card:hover::before{
+  transform:translateX(100%);
+}
+
+.timeline-card:hover{
+  transform:translateY(-8px);
+  box-shadow:
+    0 25px 50px rgba(79,124,255,0.45),
+    0 0 30px rgba(79,124,255,0.35);
+}
+
+.timeline-card h3{
+  margin-bottom:12px;
+  color:#ffffff;
+  font-size:1.1rem;
+  line-height:1.5;
+}
 
 /* ---------- MODAL ---------- */
-.modal { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); justify-content:center; align-items:center; z-index:2000; }
-.modal-content { background:#0f1425; padding:30px; border-radius:20px; max-width:700px; width:90%; position:relative; animation:pop 0.4s ease; box-shadow:0 0 30px #4f7cff; }
-@keyframes pop{ from{transform:scale(0.9);opacity:0;} to{transform:scale(1);opacity:1;} }
-.close { position:absolute; top:15px; right:20px; font-size:28px; cursor:pointer; color:#aaa; }
-.close:hover { color:white; }
-.modal a { display:inline-block; margin-top:20px; padding:10px 20px; border-radius:12px; background:#4f7cff; color:white; font-weight:500; text-decoration:none; }
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.88);
+  backdrop-filter:blur(8px);
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
 
-/* ---------- SHOW ANIMATION ---------- */
-.timeline-item.show { opacity:1 !important; transform:translateY(0) !important; }
+.modal-content{
+  background:#0f1425;
+  padding:35px;
+  border-radius:22px;
+  max-width:750px;
+  width:90%;
+  position:relative;
+  animation:pop 0.4s ease;
+  box-shadow:
+    0 0 30px #4f7cff,
+    inset 0 0 20px rgba(79,124,255,0.15);
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+@keyframes pop{
+  from{
+    transform:scale(0.9);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.close{
+  position:absolute;
+  top:15px;
+  right:20px;
+  font-size:30px;
+  cursor:pointer;
+  color:#aaa;
+  transition:0.3s;
+}
+
+.close:hover{
+  color:white;
+  transform:scale(1.15);
+}
+
+.modal h2{
+  margin-bottom:18px;
+  line-height:1.5;
+}
+
+.modal p{
+  line-height:1.8;
+  color:#cbd5f5;
+}
+
+.modal a{
+  display:inline-block;
+  margin-top:24px;
+  padding:12px 24px;
+  border-radius:14px;
+  background:#4f7cff;
+  color:white;
+  font-weight:500;
+  transition:0.3s;
+  box-shadow:0 0 20px rgba(79,124,255,0.5);
+}
+
+.modal a:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 35px rgba(79,124,255,0.8);
+}
+
+/* ---------- SHOW ---------- */
+.timeline-item.show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+}
 
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:768px){
-  .timeline-item, .timeline-item.right, .timeline-item.left { width:90%; left:5% !important; text-align:left !important; }
-  .timeline-item::after { left:-10px !important; right:auto !important; }
-  .year-label { font-size:1rem; padding:5px 12px; }
+
+  .timeline::before{
+    left:20px;
+  }
+
+  .timeline-item,
+  .timeline-item.right,
+  .timeline-item.left{
+    width:100%;
+    left:0 !important;
+    text-align:left !important;
+    padding-left:55px;
+  }
+
+  .timeline-item::after{
+    left:10px !important;
+    right:auto !important;
+  }
+
+  .year-label{
+    left:20px;
+    transform:none;
+  }
+
+  nav ul{
+    gap:15px;
+    flex-wrap:wrap;
+  }
+
+  h1{
+    font-size:2.1rem;
+  }
 }
+
 </style>
 </head>
+
 <body>
 
 <!-- NAVBAR -->
@@ -103,79 +370,224 @@ background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color
   </ul>
 </nav>
 
+<!-- CONTENT -->
 <div class="container">
+
 <h1>Publications Timeline</h1>
+
 <div class="timeline" id="timeline"></div>
+
 </div>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
+
   <div class="modal-content">
+
     <span class="close" onclick="closeModal()">×</span>
+
     <h2 id="modalTitle"></h2>
+
     <p id="modalText"></p>
-    <a id="modalLink" target="_blank">Read Full Paper</a>
+
+    <a id="modalLink" target="_blank">
+      Read Full Paper
+    </a>
+
   </div>
+
 </div>
 
 <script>
-// ---------- DATA ----------
+
+/* ---------- DATA ---------- */
 const papers = [
-  {title:"Machine Learning-Aided Performance-Based Optimal Design of Steel Moment-Resisting Frames Using NSGA-II", year:2025, authors:"S. Bakhshinezhad, <strong>Ehsan Mansouri</strong>, Seong-Hoon Jeong", journal:"Natural Hazards Review", link:"https://ascelibrary.org/doi/10.1061/NHREFO.NHENG-2313"},
-  {title:"Development of a new polyurethane elastomer class for accurate simulation of structural behavior in OpenSees", year:2024, authors:"SJ Mortazavi, SS Mortazavi, E Retzepis, <strong>Ehsan Mansouri</strong>, JW Hu", journal:"Journal of Mechanical Science and Technology", link:"https://link.springer.com/article/10.1007/s12206-024-1113-x"},
-  {title:"Five Machine Learning Models Predicting the Global Shear Capacity of Composite Cellular Beams with Hollow-Core Units", year:2024, authors:"FPV Ferreira, S-H Jeong, <strong>Ehsan Mansouri</strong>, et al.", journal:"Buildings", link:"https://www.mdpi.com/2075-5309/14/7/2256"},
-  {title:"An advanced software interface to make OpenSees for thermal analysis of structures more user-friendly", year:2024, authors:"S-H Jeong, <strong>Ehsan Mansouri</strong>, Nicholas Ralston, JW Hu", journal:"Steel and Composite Structures", link:"https://www.techno-press.org/content/?page=article&journal=scs&volume=51&num=2&ordernum=3"},
-  {title:"Modeling properties of recycled aggregate concrete using gene expression programming and artificial neural network techniques", year:2024, authors:"PO Awoyera, A Bahrami, C Oranye, <strong>Ehsan Mansouri</strong>, et al.", journal:"Frontiers in Built Environment", link:"https://www.frontiersin.org/journals/built-environment/articles/10.3389/fbuil.2024.1447800/full"},
-  {title:"Comparison of improved relevance vector machines for streamflow predictions", year:2024, authors:"Rana Muhammad Adnan, Reham R Mostafa, Hong‐Liang Dai, <strong>Ehsan Mansouri</strong>, Ozgur Kisi, Mohammad Zounemat‐Kermani", journal:"Journal of Forecasting", link:"https://onlinelibrary.wiley.com/doi/full/10.1002/for.3028"},
-  {title:"A data replication algorithm for improving server efficiency in cloud computing using PSO and fuzzy systems", year:2023, authors:"Mostafa Sabzekar, <strong>Ehsan Mansouri</strong>, Arash Deldari", journal:"Computer and Knowledge Engineering", link:"https://cke.um.ac.ir/article_44305.html"},
-  {title:"Environmentally friendly concrete compressive strength prediction using hybrid machine learning", year:2022, authors:"<strong>Ehsan Mansouri</strong>, M. Manfredi, JW Hu", journal:"Sustainability", link:"https://www.mdpi.com/2071-1050/14/20/12990"},
-  {title:"Development of New Material Models for Thermal Behavior of Cold-Formed G-450 and G-550 Steels in OpenSees Software", year:2022, authors:"Iman Mansouri, SJ Mortazavi, Maeve Manfredi, PO Awoyera, <strong>Ehsan Mansouri</strong>, Ali Khaki, JW Hu", journal:"ASCE", link:"https://ascelibrary.org/doi/abs/10.1061/JAEIED.AEENG-1491"},
-  {title:"Combination of data replication and scheduling algorithm for improving data availability in Data Grids", year:2013, authors:"<strong>Ehsan Mansouri</strong>, N. Mansouri, GH Dastghaibyfard", journal:"Journal of Network and Computer Applications", link:"https://www.sciencedirect.com/science/article/abs/pii/S1084804512002688#:~:text=The%20data%20replication%20algorithms%20increase,dynamic%20replication%20indicates%20prominent%20performance"},
-  {title:"Proposing and Evaluating Dynamic Data Replication Strategy in Data Grid Environment", year:2013, authors:"Najme Mansouri, <strong>Ehsan Mansouri</strong>, Amir Yazdinezhad, Sahar Abedpour", journal:"Majlesi Journal of Multimedia Processing", link:"https://d1wqtxts1xzle7.cloudfront.net/90629413/pdf-libre.pdf"}
+
+{
+title:"PSO-based feature selection techniques—challenges and methodologies: a review",
+year:2026,
+authors:"Najme Mansouri, Mahdi Abolghasemi, <strong>Ehsan Mansouri</strong>",
+journal:"International Journal of System Assurance Engineering and Management",
+link:"https://link.springer.com/article/10.1007/s13198-026-03340-7"
+},
+
+{
+title:"Machine Learning-Aided Performance-Based Optimal Design of Steel Moment-Resisting Frames Using NSGA-II",
+year:2025,
+authors:"S. Bakhshinezhad, <strong>Ehsan Mansouri</strong>, Seong-Hoon Jeong",
+journal:"Natural Hazards Review",
+link:"https://ascelibrary.org/doi/10.1061/NHREFO.NHENG-2313"
+},
+
+{
+title:"Development of a new polyurethane elastomer class for accurate simulation of structural behavior in OpenSees",
+year:2024,
+authors:"SJ Mortazavi, SS Mortazavi, E Retzepis, <strong>Ehsan Mansouri</strong>, JW Hu",
+journal:"Journal of Mechanical Science and Technology",
+link:"https://link.springer.com/article/10.1007/s12206-024-1113-x"
+},
+
+{
+title:"Five Machine Learning Models Predicting the Global Shear Capacity of Composite Cellular Beams with Hollow-Core Units",
+year:2024,
+authors:"FPV Ferreira, S-H Jeong, <strong>Ehsan Mansouri</strong>, et al.",
+journal:"Buildings",
+link:"https://www.mdpi.com/2075-5309/14/7/2256"
+},
+
+{
+title:"An advanced software interface to make OpenSees for thermal analysis of structures more user-friendly",
+year:2024,
+authors:"S-H Jeong, <strong>Ehsan Mansouri</strong>, Nicholas Ralston, JW Hu",
+journal:"Steel and Composite Structures",
+link:"https://www.techno-press.org/content/?page=article&journal=scs&volume=51&num=2&ordernum=3"
+},
+
+{
+title:"Modeling properties of recycled aggregate concrete using gene expression programming and artificial neural network techniques",
+year:2024,
+authors:"PO Awoyera, A Bahrami, C Oranye, <strong>Ehsan Mansouri</strong>, et al.",
+journal:"Frontiers in Built Environment",
+link:"https://www.frontiersin.org/journals/built-environment/articles/10.3389/fbuil.2024.1447800/full"
+},
+
+{
+title:"Comparison of improved relevance vector machines for streamflow predictions",
+year:2024,
+authors:"Rana Muhammad Adnan, Reham R Mostafa, Hong‐Liang Dai, <strong>Ehsan Mansouri</strong>, Ozgur Kisi, Mohammad Zounemat‐Kermani",
+journal:"Journal of Forecasting",
+link:"https://onlinelibrary.wiley.com/doi/full/10.1002/for.3028"
+},
+
+{
+title:"A data replication algorithm for improving server efficiency in cloud computing using PSO and fuzzy systems",
+year:2023,
+authors:"Mostafa Sabzekar, <strong>Ehsan Mansouri</strong>, Arash Deldari",
+journal:"Computer and Knowledge Engineering",
+link:"https://cke.um.ac.ir/article_44305.html"
+},
+
+{
+title:"Environmentally friendly concrete compressive strength prediction using hybrid machine learning",
+year:2022,
+authors:"<strong>Ehsan Mansouri</strong>, M. Manfredi, JW Hu",
+journal:"Sustainability",
+link:"https://www.mdpi.com/2071-1050/14/20/12990"
+},
+
+{
+title:"Development of New Material Models for Thermal Behavior of Cold-Formed G-450 and G-550 Steels in OpenSees Software",
+year:2022,
+authors:"Iman Mansouri, SJ Mortazavi, Maeve Manfredi, PO Awoyera, <strong>Ehsan Mansouri</strong>, Ali Khaki, JW Hu",
+journal:"ASCE",
+link:"https://ascelibrary.org/doi/abs/10.1061/JAEIED.AEENG-1491"
+},
+
+{
+title:"Combination of data replication and scheduling algorithm for improving data availability in Data Grids",
+year:2013,
+authors:"<strong>Ehsan Mansouri</strong>, N. Mansouri, GH Dastghaibyfard",
+journal:"Journal of Network and Computer Applications",
+link:"https://www.sciencedirect.com/science/article/abs/pii/S1084804512002688#:~:text=The%20data%20replication%20algorithms%20increase,dynamic%20replication%20indicates%20prominent%20performance"
+},
+
+{
+title:"Proposing and Evaluating Dynamic Data Replication Strategy in Data Grid Environment",
+year:2013,
+authors:"Najme Mansouri, <strong>Ehsan Mansouri</strong>, Amir Yazdinezhad, Sahar Abedpour",
+journal:"Majlesi Journal of Multimedia Processing",
+link:"https://d1wqtxts1xzle7.cloudfront.net/90629413/pdf-libre.pdf"
+}
+
 ];
 
-// ---------- GENERATE TIMELINE ----------
+/* ---------- GENERATE TIMELINE ---------- */
 const timelineContainer = document.getElementById("timeline");
+
 let currentYear = null;
-let sideSwitch = "left"; // toggle per year
+let sideSwitch = "left";
+
 papers.sort((a,b)=>b.year-a.year).forEach((p,i)=>{
+
   if(p.year !== currentYear){
+
     currentYear = p.year;
-    // add year label
+
     const yearDiv = document.createElement("div");
-    yearDiv.className="year-label";
-    yearDiv.innerText=currentYear;
+    yearDiv.className = "year-label";
+    yearDiv.innerText = currentYear;
+
     timelineContainer.appendChild(yearDiv);
-    // switch side for new year
-    sideSwitch = sideSwitch==="left"?"right":"left";
+
+    sideSwitch = sideSwitch === "left" ? "right" : "left";
   }
+
   const div = document.createElement("div");
-  div.className="timeline-item "+sideSwitch;
-  div.style.transitionDelay = (i*0.15)+"s"; // staggered fade
-  div.innerHTML = `<div class="timeline-card"><h3>${p.title}</h3></div>`;
+
+  div.className = "timeline-item " + sideSwitch;
+
+  div.style.transitionDelay = (i * 0.12) + "s";
+
+  div.innerHTML = `
+    <div class="timeline-card">
+      <h3>${p.title}</h3>
+    </div>
+  `;
+
   div.querySelector(".timeline-card").onclick = ()=>openModal(i);
+
   timelineContainer.appendChild(div);
+
 });
 
-// ---------- MODAL ----------
+/* ---------- MODAL ---------- */
 function openModal(i){
+
   const p = papers[i];
+
   document.getElementById("modal").style.display = "flex";
+
   document.getElementById("modalTitle").innerHTML = p.title;
-  document.getElementById("modalText").innerHTML = `<strong>Authors:</strong> ${p.authors}<br><strong>Journal:</strong> ${p.journal}<br><strong>Year:</strong> ${p.year}`;
+
+  document.getElementById("modalText").innerHTML = `
+    <strong>Authors:</strong> ${p.authors}<br><br>
+    <strong>Journal:</strong> ${p.journal}<br><br>
+    <strong>Year:</strong> ${p.year}
+  `;
+
   document.getElementById("modalLink").href = p.link;
 }
-function closeModal(){ document.getElementById("modal").style.display="none"; }
 
-// ---------- SCROLL ANIMATION ----------
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+}
+
+/* ---------- CLOSE ON OUTSIDE CLICK ---------- */
+window.onclick = function(e){
+  const modal = document.getElementById("modal");
+  if(e.target === modal){
+    closeModal();
+  }
+}
+
+/* ---------- SCROLL ANIMATION ---------- */
 const observer = new IntersectionObserver((entries)=>{
+
   entries.forEach(entry=>{
+
     if(entry.isIntersecting){
-      entry.target.classList.add('show');
+      entry.target.classList.add("show");
     }
+
   });
+
 },{threshold:0.1});
-document.querySelectorAll('.timeline-item').forEach(el=>observer.observe(el));
+
+document.querySelectorAll(".timeline-item").forEach(el=>{
+  observer.observe(el);
+});
+
 </script>
+
 </body>
 </html>
